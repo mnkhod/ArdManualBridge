@@ -33,22 +33,15 @@ contract ArdCoinManualBridgeMinter is AccessControl, Pausable {
       require(to != address(0),"TO ADDRESS EMPTY");
       require(amount != 0,"AMOUNT EMPTY");
 
-      uint256 currentBalance = _token.totalSupply();
       _token.mint(to,amount);
-      uint256 newBalance = _token.totalSupply();
-      require(currentBalance + amount == newBalance,"TOKEN MINT FAILED");
-
       emit TokenMinted(amount);
     }
 
-    function burn(uint256 amount) public onlyRole(BURN_ROLE) whenNotPaused() {
+    function burn(address from,uint256 amount) public onlyRole(BURN_ROLE) whenNotPaused() {
+      require(from != address(0),"FROM ADDRESS EMPTY");
       require(amount != 0,"AMOUNT EMPTY");
 
-      uint256 currentBalance = _token.totalSupply();
-      _token.burnFrom(msg.sender,amount);
-      uint256 newBalance = _token.totalSupply();
-      require(currentBalance - amount == newBalance,"TOKEN BURN FAILED");
-
+      _token.burnFrom(from,amount);
       emit TokenBurned(amount);
     }
 

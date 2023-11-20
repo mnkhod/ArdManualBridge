@@ -4,7 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx hardhat test",
+    "compile": "npx hardhat compile",
+    "coverage": "npx hardhat coverage",
+    "force-compile": "npx hardhat compile --force",
+
+    "deploy-local": "npx hardhat run scripts/deployment.ts",
+    "deploy-ganache": "npx hardhat run scripts/deployment.ts --network ganache",
+    "deploy": "npx hardhat run scripts/deployment.ts --network bsc",
+    "deploy-test": "npx hardhat run scripts/deployment.ts --network bscTestnet"
+
   },
   "keywords": [],
   "author": "",

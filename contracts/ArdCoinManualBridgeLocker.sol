@@ -33,9 +33,7 @@ contract ArdCoinManualBridgeLocker is AccessControl, Pausable {
       require(from != address(0),"FROM ADDRESS EMPTY");
       require(amount != 0,"AMOUNT EMPTY");
 
-      bool isTranfered = _token.transferFrom(from,address(this),amount);
-      require(isTranfered == true,"TOKEN TRANSFER FAILED");
-
+      _token.transferFrom(from,address(this),amount);
       emit TokenLocked(amount);
     }
 
@@ -43,9 +41,7 @@ contract ArdCoinManualBridgeLocker is AccessControl, Pausable {
       require(to != address(0),"TO ADDRESS EMPTY");
       require(amount != 0,"AMOUNT EMPTY");
 
-      bool isTranfered = _token.transferFrom(address(this),to,amount);
-      require(isTranfered == true,"TOKEN TRANSFER FAILED");
-
+      _token.transfer(to,amount);
       emit TokenUnlocked(amount);
     }
 
